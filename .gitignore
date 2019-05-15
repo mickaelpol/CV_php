@@ -1,0 +1,8 @@
+node_modules
+sendgrid.env
+
+/google/vendor
+/google/composer.lock
+/vendor/
+
+.idea

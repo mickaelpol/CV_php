@@ -1,0 +1,132 @@
+<?php
+
+namespace App\Form;
+
+/**
+ * Class Form permet de générer le formulaire html
+ */
+class Form
+{
+
+
+    /**
+     * Clé publique du recaptcha V2 de google
+     *
+     * @var string
+     */
+    private $key = "6Lewn1oUAAAAAASF2arJZiuIngk2lB8gvJ5GswKZ";
+
+    /**
+     * On stocke les datas dans un tableau
+     *
+     * @var array
+     */
+    private $datas = [];
+
+    /**
+     * Function construct pour créer les inputs avec des valeur ou non en fonction de si le formulaire à déja été soumis
+     *
+     * @param array $datas
+     */
+    public function __construct($datas = [])
+    {
+        $this->datas = $datas;
+    }
+    
+    /**
+     * Fonction permettant la création d'input html
+     *
+     * @param string $type
+     * @param string $name
+     * @param string $placeholder
+     * @param string $required
+     * @return void
+     */
+    private function input($type, $name, $placeholder, $required = null)
+    {
+        $value = "";
+        if (isset($this->datas[$name])) {
+            $value = $this->datas[$name];
+        }
+        
+        if ($type === "textarea") {
+            $input = "<textarea $required name=\"$name\" class=\"form-control fz18\" id=\"$name\" placeholder=\"$placeholder\" rows=\"7\" maxlength=\"280\">$value</textarea>";
+        } else {
+            $input = "<input $required type=\"$type\" name=\"$name\" class=\"form-control fz18\" id=\"$name\" value=\"$value\" placeholder=\"$placeholder\">";
+        }
+        
+        return "<div class=\"form-group\"> 
+                    $input
+                </div>";
+    }
+
+    /**
+     * Fonction permettant de créer un input de type text via la fonction input
+     *
+     * @param string $name
+     * @param string $placeholder
+     * @return void
+     */
+    public function text($name, $placeholder)
+    {
+        return $this->input("text", $name, $placeholder, "required");
+    }
+    
+    /**
+     * Fonction permettant de créer un input de type email via la fonction input
+     *
+     * @param string $name
+     * @param string $placeholder
+     * @return void
+     */
+    public function email($name, $placeholder)
+    {
+        return $this->input("email", $name, $placeholder, "required");
+    }
+
+    
+    /**
+     * Fonction permettant de créer un input de type number via la fonction input
+     *
+     * @param string $name
+     * @param string $placeholder
+     * @return void
+     */
+    public function mobile($name, $placeholder)
+    {
+        return $this->input("number", $name, $placeholder, "");
+    }
+    
+    /**
+     * Fonction permettant de créer un input de type textarea via la fonction input
+     *
+     * @param string $name
+     * @param string $placeholder
+     * @return void
+     */
+    public function textarea($name, $placeholder)
+    {
+        return $this->input("textarea", $name, $placeholder, "required");
+    }
+
+    /**
+     * Fonction permettant de créer un bouton de submit
+     *
+     * @param string $label
+     * @return void
+     */
+    public function submit($label)
+    {
+        return '<button type="submit" name="submit" id="submit" class="btn btn-info btn-block text-uppercase btn-submit">' . $label . '</button>';
+    }
+
+    /**
+     * Fonction permettant de créer un captcha V2 de google renseigné avec la clé publique renseigné plus haut
+     *
+     * @return void
+     */
+    public function captcha()
+    {
+        return "<div class=\"img-responsive g-recaptcha\" data-sitekey=\"$this->key\"></div>";
+    }
+}

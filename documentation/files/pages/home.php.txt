@@ -1,0 +1,950 @@
+<?php
+    session_start();
+    use App\Form\Form;
+?>
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119799253-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-119799253-1');
+        </script>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>curriculum vitae</title>
+
+        <!-- Bootstrap CSS -->
+        <!--<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">-->
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <!--<link href="font/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">-->
+        <link rel="stylesheet" href="assets/font/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/css/size.css">
+        <!-- link policies style -->
+        <link rel="stylesheet" href="assets/css/policies.css">
+        <!-- Add my style css -->
+        <link href="assets/css/app.css" rel="stylesheet">
+        <!-- favicon du CV -->
+        <link rel="icon" type="image/png" href="img/icons8-cv-filled-50.png" />
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+    </head>
+    <body>
+
+        <div class="container">
+            <nav class="navbar navbar-fixed-top navbar-inverse visible-xs">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span> 
+                    </button>
+                    <a class="navbar-brand" href"#">POL Mickael</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a class="homeClick" href="#">
+                                <span class="fa fa-home fa-xs-home"></span>
+                                 Accueil
+                            </a>
+                        </li>
+                        <li>
+                            <a class="compClick" href="#">
+                                <span class="fa fa-map-marker fa-xs-marker"></span>
+                                 Compétences
+                            </a>
+                        </li>
+                        <li>
+                            <a class="xpClick" href="#">
+                                <span class="fa fa-briefcase fa-xs-xp"></span>
+                                 Expèriences
+                            </a>
+                        </li> 
+                        <li>
+                            <a class="dipClick" href="#">
+                                <span class="fa fa-graduation-cap fa-xs-grad"></span>
+                                 Diplomes
+                            </a>
+                        </li> 
+                        <li>
+                            <a class="proClick" href="#">
+                                <span class="fa fa-folder-open fa-xs-pro"></span>
+                                 Projets
+                            </a>
+                        </li> 
+                        <li>
+                            <a class="contactClick" href="#">
+                                <span class="fa fa-envelope fa-xs-con"></span>
+                                Contact
+                            </a>
+                        </li> 
+                    </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        
+        <div class="container margeTop marginBot">
+            <div class="row">
+                <div class="row">
+                    <div id="photoProfil" class="col-xs-12 col-sm-4 hidden-lg hidden-md">
+                        <!-- requete ajax pour recuperer la photo de profil -->
+                        <div id="loader" class="loader center-block"></div>
+                    </div>
+                    <div id="photoProfil2" class="col-lg-4 col-md-4 hidden-xs hidden-sm">
+                        <div id="loader2" class="loader center-block"></div>
+                    </div>
+            
+                    <div class="col-lg-8 col-md-8 col-xs-12 col-sm-8">
+                        <div class="row">
+                            <div class="col-lg-10 col-xs-10 nP">
+                                <p>Pol Mickael</p>
+                            </div>
+                            <button id="cvPdf" data-toggle="modal" data-target="#myModal" class="col-lg-2 col-xs-2 np2 text-center dlCv">
+                                <i id="pop" class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-xs-12 col-sm-8">
+                        <div class="row">
+                            <div class="col-lg-10 col-xs-10 np4">
+                                <p>Developpeur Web et mobile</p>
+                            </div>
+                            <a id="github" target="blank" href="https://github.com/mickaelpol?tab=repositories">
+                                <div class="col-lg-2 col-xs-2 np3 text-center">
+                                    <i id="pop2" class="fa fa-github" aria-hidden="true"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-4 col-md-8 col-md-offset-4 col-sm-8 col-sm-offset-4 hidden-xs">
+                        <div class="text-center text-capitalize">
+                            <div class="row">
+                                <a class="homeClick" href="#">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 vert">
+                                        <span class="fa fa-home fa-3x"></span>
+                                        </br>
+                                        <small>accueil</small>
+                                    </div>
+                                </a>
+                                <a class="compClick" href="#">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 jaune">
+                                        <span class="fa fa-map-marker fa-3x"></span>
+                                        </br>
+                                        <small>compétences</small>
+                                    </div>
+                                </a>
+                                <a class="xpClick" href="#">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 violet">
+                                        <span class="fa fa-briefcase fa-3x"></span>
+                                        </br>
+                                        <small>expériences</small>
+                                    </div>
+                                </a>
+                                <a class="dipClick" href="#">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 bleu">
+                                        <span class="fa fa-graduation-cap fa-3x"></span>
+                                        </br>
+                                        <small>diplomes</small>
+                                    </div>
+                                </a>
+                                <a class="proClick" href="#">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 orange">
+                                        <span class="fa fa-folder-open fa-3x"></span>
+                                        </br>
+                                        <small>projets</small>
+                                    </div>
+                                </a>
+                                <a class="contactClick" href="#">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 cont-color">
+                                        <span class="fa fa-envelope fa-3x"></span>
+                                        </br>
+                                        <small>contact</small>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- header -->
+
+        <!-- body -->
+        <!--///////////////////////// DEBUT PAGE ACCUEIL ///////////////////////// -->
+        <div id="home" class="container">
+            <div class="row gridus">
+                <div>
+                    <!-- /////////////////////// personal info ////////////////////// -->
+                    <div class="col-lg-6 text-center PersonalInfo bordArrondis">
+                        <div class="row text-uppercase">
+                            <h2>Informations Personnelles</h2>
+                        </div>
+                        <div class="row text-justify infoPerso">
+                            <div class="col-lg-5 col-lg-offset-1 text-uppercase text-left">
+                                <p>nom :</p>
+                            </div>
+                            <div class="col-lg-5">
+                                <p class="fz18 text-left">Pol Mickael</p>
+                            </div>
+                        </div>
+                        <div class="row text-justify">
+                            <div class="col-lg-5 col-lg-offset-1 text-uppercase text-left">
+                                <p>date de naissance :</p>
+                            </div>
+                            <div class="col-lg-5">
+                                <p class="fz18">9 Aout 1989</p>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-lg-5 col-lg-offset-1 text-uppercase text-left">
+                                <p>adresse :</p>
+                            </div>
+                            <div class="col-lg-5 text-left">
+                                <p class="fz18">18 Rue de cugnaux</p>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-lg-5 col-lg-offset-1 text-uppercase text-left">
+                                <p>Code postal :</p>
+                            </div>
+                            <div class="col-lg-5 text-left">
+                                <p class="fz18">31300 Toulouse</p>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-lg-5 col-lg-offset-1 text-uppercase text-left">
+                                <p>tel :</p>
+                            </div>
+                            <div class="col-lg-5 text-left">
+                                <p class="fz18">07 81 94 81 13</p>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-lg-5 col-lg-offset-1 text-uppercase text-left">
+                                <p>email :</p>
+                            </div>
+                            <div class="col-lg-5 text-left">
+                                <p class="fz18 mail">mickael.devweb@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-lg-5 col-lg-offset-1 text-uppercase text-left">
+                                <p>permis :</p>
+                            </div>
+                            <div class="col-lg-5 text-left">
+                                <p class="fz18 mail">Permis B</p>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-lg-5 col-lg-offset-1 text-uppercase text-left">
+                                <p>langue :</p>
+                            </div>
+                            <div class="col-lg-5 text-left">
+                                <p class="fz18 mail">
+                                    <img class="icone" src="img/francais.png" alt="icone drapeau français">
+                                    <img class="icone" src="img/anglais.png" alt="icone drapeau anglais">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-uppercase text-left">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h2 class="Pbleu">Développeur Web et mobile junior</h2>
+                                <small class="Pbleu">Résumé du CV</small>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 margeTop">
+                                <div class="col-lg-2">
+                                    <span class="fa fa-user-circle-o fa-3x"></span>
+                                </div>
+                                <div class="col-lg-10">
+                                    <h4>A Propos de moi</h4>
+                                </div>
+                                <div class="col-lg-10 col-lg-offset-2 lhText">
+                                    <p class="text-justify">
+                                        Dans le batiment depuis 10 ans, je me suis lancer dans le développement web par passion.
+                                        <br>
+                                        <div class="page-header"></div>
+                                        J'ai suivi le parcour de formation développeur web et mobile simplon pendant 10 mois.
+                                        Aujourd'hui je suis a l'aise sur plusieur techno, pour travailler en équipe et autonome pour la veille techno.
+                                        <br>
+                                        <div class="page-header"></div>
+                                        J'aime beaucoup les projets novateur, tout se qui touche à la réalité augmenté, réalité virtuelle.
+                                        <br>
+                                        <div class="page-header"></div>
+                                        De nature énergique et autonome, j'aime prendre les choses en main et je m'implique rapidement dans un projet.
+                                        <br>
+                                        <div class="page-header"></div>
+                                        De nature assez sociable j'aime travailler en équipe et pendants mes temps libre, profiter de sortir pour voirs des amis ou m'adonner à mes passe temps préféré.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!--///////////////////////// FIN PAGE ACCUEIL ///////////////////////// -->
+        
+        <!--///////////////////////// DEBUT PAGE COMPETENCES ///////////////////////// -->
+        
+        <div id="comp" class="skills container margeTop">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="text-uppercase">compétences</h2>
+                    </br>
+                    <div class="row padBot">
+                        <div class="col-lg-4 col-sm-6">
+                            <h3 class="text-center">HTML5-CSS3</h3>
+                            <img class="css center-block" src="img/html5.png" alt="icone html css">
+                            </br>
+                            <div class="text-center fz30 star">
+                                <div id="starHtml"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6">
+                            <h3 class="text-center">BOOTSTRAP</h3>
+                            <img class="css center-block" src="img/bootstrap.png" alt="icone bootstrap">
+                            </br>
+                            <div class="text-center fz30 star">
+                                <div id="starBoot"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6">
+                            <h3 class="text-center">JAVASCRIPT-JQUERY-AJAX</h3>
+                            <img class="css center-block" src="img/ajax-tutorial-javascript-jquery.jpg" alt="icone js jquery ajax">
+                            </br>
+                            <div class="text-center fz30 star">
+                                <div id="starJs"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-offset-1 col-lg-10 page-header"></div>
+
+                <div class="col-lg-12">
+                    <div class="row padBot">
+                        <div class="col-lg-4 col-sm-6">
+                            <h3 class="text-center">PHP-SYMFONY-LARAVEL</h3>
+                            <img class="css center-block" src="img/PHP-SymfonyVsLaravel.jpg" alt="icone php symfony laravel">
+                            </br>
+                            <div class="text-center fz30 star">
+                                <div id="starPhp"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6">
+                            <h3 class="text-center">MYSQL</h3>
+                            <img class="css center-block" src="img/MySQL.svg.png" alt="icone mysql">
+                            </br>
+                            <div class="text-center fz30 star">
+                                <div id="starMysql"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6">
+                            <h3 class="text-center">METHODE AGILES SCRUM</h3>
+                            <img class="css center-block" src="img/agile-pm-kanban-board.png" alt="icone methode agiles">
+                            </br>
+                            <div class="text-center fz30 star">
+                                <div id="starScrum"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!--///////////////////////// FIN PAGE COMPETENCES ///////////////////////// -->
+        
+        <!--///////////////////////// DEBUT PAGE EXPERIENCES ///////////////////////// -->
+        
+        <div id="xp" class="container margeTop xP">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="text-uppercase ">
+                        expériences
+                    </h2>
+                    </br>
+                    <blockquote>
+                        <ul>
+                            <li class="date">
+                                <h3>
+                                    Développeur web et mobile, Innoside (31)
+                                    <span class="date fz18">&nbsp;&nbsp;&nbsp;&nbsp;02/2018 - 04/2018</span>
+                                </h3>
+                            </li>
+                            <ul class="list-unstyled lhTextP">
+                                <li>
+                                    - Etablissement du cahier des charges, Wireframe , MCD  et
+                                    MPD de la base de données
+                                </li>
+                                <li>
+                                    - Création du back-end  en relation avec la base de données 
+                                    pour une application mobile de réalité augmenté  avec des
+                                    routes api servant à envoyer et récupérer des informations
+                                    dans la base de données via l'application mobile
+                                </li>
+                                <li>
+                                    - Mise en place du front de l'application web pour créer un
+                                    accès utilisateur et admin sur le site servant de back-office à
+                                    l'application mobile.
+                                </li>
+                                <li>
+                                    - Le back-office gère le contenu ajouter à l'application
+                                    mobile  et les comptes utilisateurs/admin de l'application
+                                </li>
+                                <li>
+                                    - Lien de l'application web : "light"
+                                </li>
+                            </ul>
+                            <br>
+                            <li>
+                                <h3>
+                                    Monteur en gaine de ventilation (31)
+                                    <span class="date fz18">&nbsp;&nbsp;&nbsp;&nbsp;2015 - 2017</span>
+                                </h3>
+                            </li>
+                            <li>
+                                <h3>
+                                    Poseur parquet / terrasse / pergola (31)
+                                    <span class="date fz18">&nbsp;&nbsp;&nbsp;&nbsp;2014 - 2015</span>
+                                </h3>
+                            </li>
+                            <li>
+                                <h3>
+                                    Installateur génie climatique en intérim (31)
+                                    <span class="date fz18">&nbsp;&nbsp;&nbsp;&nbsp;2012 - 2014</span>
+                                </h3>
+                            </li>
+                            <li>
+                                <h3>
+                                    Service des eaux Cambounès (81)
+                                    <span class="date fz18">&nbsp;&nbsp;&nbsp;&nbsp;2011</span>
+                                </h3>
+                            </li>
+                            <li>
+                                <h3>
+                                    Apprentissage génie climatique SPIE (81)
+                                    <span class="date fz18">&nbsp;&nbsp;&nbsp;&nbsp;2008 - 2010</span>
+                                </h3>
+                            </li>
+                        </ul>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+        
+        <!--///////////////////////// FIN PAGE EXPERIENCES ///////////////////////// -->
+        
+        
+        <!--///////////////////////// DEBUT PAGE DIPLOMES ///////////////////////// -->
+        
+        <div id="dip" class="container margeTop dip">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="text-uppercase ">
+                        Diplômes
+                    </h2>
+                    </br>
+                    <blockquote>
+                        <ul>
+                            <li class="date">
+                                <h3>
+                                    Certification d'état développeur web et mobile de niveau III (en cours)
+                                    <span class="date fz18">&nbsp;&nbsp;&nbsp;&nbsp;2017 - 2018</span>
+                                </h3>
+                            </li>
+                            <br>
+                            <li>
+                                <h3>
+                                    Formation énergie renouvelable AFPA
+                                    <span class="date fz18">&nbsp;&nbsp;&nbsp;&nbsp;2012</span>
+                                </h3>
+                            </li>
+                            <br>
+                            <li>
+                                <h3>
+                                    BAC Pro génie climatique
+                                    <span class="date fz18">&nbsp;&nbsp;&nbsp;&nbsp;2008 - 2010</span>
+                                </h3>
+                            </li>
+                            <br>
+                            <li>
+                                <h3>
+                                    BEP Plombier / Chauffagiste
+                                    <span class="date fz18">&nbsp;&nbsp;&nbsp;&nbsp;2006 - 2008</span>
+                                </h3>
+                            </li>
+                            <br>
+                            <li>
+                                <h3>
+                                    Brevet des collèges
+                                    <span class="date fz18">&nbsp;&nbsp;&nbsp;&nbsp;2006</span>
+                                </h3>
+                            </li>
+                        </ul>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+        
+        <!--///////////////////////// FIN PAGE DIPLOMES ///////////////////////// -->
+        
+        
+        <!--///////////////////////// DEBUT PAGE PROJET ///////////////////////// -->
+        
+        <div id="pro" class="container margeTop pro">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="text-uppercase ">
+                        Projet <br> <small class="white fz16">(Cliquez sur les titres de chaque projet pour accèder à leur repo github)</small>
+                    </h2>
+                    <br>
+                    <ul class="list-unstyled">
+                        <div class="row">
+                            <div class="col-lg-12 cont-prez">
+                                <li>
+                                    <div class="col-lg-3">
+                                        <img class="img-responsive css-projet center-block" src="img/projet/innoside.jpg" alt="">
+                                        <a href="https://bitbucket.org/mystiick/light/src/master/" target="blank">
+                                            <h3 class="text-center">
+                                                Light by innoside
+                                            </h3>
+                                        </a>
+                                        <p class="text-center">
+                                            <strong>(Projet en période de stage / en ligne)</strong>
+                                            <strong><i>01/02/2018 - 31/04/2018</i></strong>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <h4 class="prez text-justify">
+                                            Light by innoside fait partie d'un projet créer en période de stage en entreprise que j'ai effectuer du mois de fevrier 2018 à fin avril 2018.
+                                        </h4>
+                                        <p class="fz18 prez text-justify">
+                                            Le projet repose sur de la réalité augmenté, principalement l'application mobile avec cordova permettant de cibler des point d'intérêts proche de soit s'affichant sous formes d'affiche virtuelle et le back-office en format web pour la gestion d'ajout/edition/suppression de contenu et modération des comptes utilisateurs.
+                                        </p>
+                                        <p class="fz18 prez text-justify">
+                                            Il à été créer et réalisé en Symfony 3.3.7, seul sur le côté back-end et back-office, j'ai établi un cahier des charges, des wireframes, MCD MPD de la base de données et un trello pour le suivi de mes taches.<br> J'ai mis en place le back-end avec une api permettant d'envoyer les informations contenu en base de données vers l'application mobile sous cordova.
+                                            <br>Le traitement des informations sur l'application mobile revenait à mon collègue de stage.
+                                        </p>
+                                        <p class="fz18 prez text-justify">
+                                            Le côté back-office de l'application light by innoside est visible et en ligne à cette
+                                            <a target="blank" href="http://145.239.73.238/light/"><b class="adresse"><i>adresse</i></b></a><br>
+                                            Il reste néanmoins en phase de test par les clients donc en attente d'un feed-back pour un possiblement ajouter ou supprimmer des fonctionnalités.
+                                        </p>
+                                    </div>
+                                </li>
+                            </div>
+                            <div class="col-lg-12 cont-prez">
+                                <li>
+                                    <div class="col-lg-3">
+                                        <img class="img-responsive css-projet center-block" src="img/projet/cv.png" alt="">
+                                        <a href="https://github.com/mickaelpol/CV_php" target="blank">
+                                            <h3 class="text-center">
+                                                CV html et php natif
+                                            </h3>
+                                        </a>
+                                        <p class="text-center">
+                                            <strong>(Cv sur lequel vous vous trouvez)</strong>
+                                            <strong><b><i>01/05/2018 - 15/05/2018</i></b></strong>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <h4 class="prez text-justify">
+                                            Ce CV permet de mettre en avant mes compétences dans le numérique mais aussi de retracer mon parcours.
+                                        </h4>
+                                        <p class="fz18 prez text-justify">
+                                            Le projet repose sur l'envie de me faire connaitre et mettre en avant les projets sur lesquels j'ai travaillé, mes compètences, mon expèrience du web et la passion du numérique.
+                                        </p>
+                                        <p class="fz18 prez text-justify">
+                                            Il à été créer et réalisé en PHP 7 sans framework, en POO pour le formulaire de contact, gerer directement via une classe pour génerer le html, une classe pour valider le formulaire et verifier que les champs obligatoire soit bien remplis et comporte les bonnes informations. <br>
+                                            Puis la dernière classe étant PHPMailer qui permet d'envoyer le mail via un service de messagerie comme gmail par exemple sans pour autant ajouter de plugins sur heroku. <br>
+                                            La partie Ajax du CV permet de récuperer ma photo de profil sur un google stylesheet et le côté javascript(jquery) me permet de changer le contenu des pages sans recharger la page.<br>
+                                            Ce CV à été versionner sur github et mis en lien sur la plateforme heroku pour la mise en ligne automatique, il suffit de push ses modifications vers le repo github et heroku étant lié au repo mettra automatiquement à jour le site.
+                                        </p>
+                                        <p class="fz18 prez text-justify">
+                                            Il est en ligne étant donnée que vous êtes dessus :).
+                                        </p>
+                                    </div>
+                                </li>
+                            </div>
+                            <div class="col-lg-12 cont-prez">
+                                <li>
+                                    <div class="col-lg-3">
+                                        <img class="img-responsive css-projet center-block" src="img/projet/cv.png" alt="">
+                                        <a href="https://github.com/mickaelpol/Cv_Back_Symfony_Api_2018" target="blank">
+                                            <h3 class="text-center">
+                                                CV Symfony
+                                            </h3>
+                                        </a>
+                                        <p class="text-center">
+                                            <strong>(en cours)</strong><br>
+                                            <strong><i>01/05/2018 - ?/?/2018</i></strong>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <h4 class="prez text-justify">
+                                            Mon CV avec le framework Symfony et AngularJs est en cours de création, il me permet de me former sur le framework AngularJs.
+                                        </h4>
+                                        <p class="fz18 prez text-justify">
+                                            Il me permettrais de maintenir à jour mon cv plus simplement avec un back-office, une apiREST, une base de données et une application en front avec le framework javascript AngularJs pour afficher mon CV en SPA (single page application).
+                                        </p>
+                                        <p class="fz18 prez text-justify">
+                                            J'ai déjà établie les MCD/MPD de ma base de données, créer le back-end et front de mon back-office.<br>
+                                            Pour l'instant l'application avec symfony est terminé elle me permet d'ajouter des catégories et du contenu dans celle-ci, elle renvoi bien un json que je pourrais traiter avec angular pour afficher chacune de ces catégories et leur contenu respectifs.
+                                        </p>
+                                        <p class="fz18 prez text-justify">
+                                            Il n'es pas encore mis en ligne car la partie Angular reste manquante, mais est a venir prochainement.
+                                        </p>
+                                    </div>
+                                </li>
+                            </div>
+                        </div>
+                        <div style="margin-top:60px;" class="row">
+                            <div class="col-lg-12 cont-prez">
+                                <li>
+                                    <div class="col-lg-3">
+                                        <img class="img-responsive css-projet center-block" src="img/projet/immo.jpg" alt="">
+                                        <a href="https://github.com/mickaelpol/annonce_immo" target="blank">
+                                            <h3 class="text-center">
+                                                Projet d'évaluation  
+                                            </h3>
+                                        </a>
+                                        <p class="text-center">
+                                            <strong>(Projet d'evaluation de compétences)</strong>
+                                            <strong><b><i>01/01/2018 - 05/02/2018</i></b></strong>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <h4 class="prez text-justify">
+                                            Le projet avait pour but d'évaluer nos compètences étant proche de la fin de formation.<br>
+                                        </h4>
+                                        <p class="fz18 prez text-justify">
+                                            Il impliquer de créer un projet permettant de gérer un site d'annonce immobilère en ligne.<br>
+                                            Mettre en vente ou en location un bien appartenant à un client par le bias d'un vendeur, le bien devait contenir une ou des photos du bien, le nom de son propriétaire, son prix, une brève description et le vendeur ayant mis en ligne la maison ou Appartement.<br>
+                                            Une gestion des comptes utilisateurs étant les vendeurs qui possèdent un espace personnel leur permettant d'avoir leur base client et les biens mis en ligne depuis leur espaces.<br>
+                                            Tous les biens devait être consultable depuis la page d'accueil, on devait pouvoir effectuer une recherche via un input de recherche, pouvoir aussi trier par titre et par prix chaque bien.<br>
+                                            Pour finir le projet devait contenir une brève description en anglais du projet sur github.<br>
+                                            Ce projet permettait de voir si l'on avait bien pris en main le coté POO de symfony c'est à dire la gestion d'entité, de classe, des formulaire, des requêtes repository, le côté moteur de template (twig / blade), l'installation même du framework et être à l'aise avec les ligne de commande propre a symfony ainsi qu'être à l'aise sur le côté technique en anglais.
+                                        </p>
+                                        <p class="fz18 prez text-justify">
+                                            Il à été créer et réalisé en Symfony 3.3.7, Le projet devait être réalisé seul. <br>
+                                            Versionné via github, les MCD/MPD de la base de données ont été créer ainsi que les wireframes de l'application. <br>
+                                            Puis la base de donnée mis en place j'ai pu mettre en place tout le côté fonctionnel de l'application (connexion / ajout de bien / mise à jour / suppresion, etc..).<br>
+                                            Une fois terminé j'ai mis en place un peu de css pour rendre le tout propre, ajouter une fonctionnalité jquery pour trier les bien par prix et par titre ainsi que l'upload de fichier via un bouton permettant l'ajout d'un bouton supplémentaire d'upload de fichier, cela permettait d'upload plusieur fichier ou un seul selon les besoins. Par la suite en consultant l'annonce les images s'affiché sous forme de carousel dans un modal.
+                                        </p>
+                                        <p class="fz18 prez text-justify">
+                                            Le projet n'à pas été mis en ligne, étant donné que ce n'était qu'un projet d'évalution permettant de remplir les compètences requise pour la certification mais il à été vu et "noté" par notre lead formateur pour permettre de validé nos compètences.
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-12 cont-prez">
+                                        <li>
+                                            <div class="col-lg-3">
+                                                <img class="img-responsive css-projet center-block" src="img/projet/mapausemode.png" alt="">
+                                                <a href="https://github.com/mickaelpol/ma_pause_mode" target="blank">
+                                                    <h3 class="text-center">
+                                                        Ma pause mode
+                                                    </h3>
+                                                </a>
+                                                <p class="text-center">
+                                                    <strong>(Projet pédagogique 2de vague)</strong>
+                                                    <strong><i>15/01/2018 - 29/01/2018</i></strong>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <h4 class="prez  text-justify">
+                                                    Ma pause mode fait partie de la deuxième vague de projets pédagogique en relation avec des entreprises.
+                                                </h4>
+                                                <p class="fz18 prez  text-justify">
+                                                    Le projet repose sur un mix entre la globetrotteuse et un blog voulant mettre en avant sa passion pour la mode et faire découvrir de nouvelles tendances à traver le monde.
+                                                </p>
+                                                <p class="fz18 prez  text-justify">
+                                                    Il à été créer et réalisé en Symfony 3.3.7, en groupe de 3 personnes à l'aide des outils trello pour l'organisation du travail en équipe et github pour le versionning
+                                                </p>
+                                                <p class="fz18 prez  text-justify">
+                                                    Il n'es pas encore mis en ligne pour des raisons d'optimisation et d'ajout de fonctionnalité voulu par la porteuse de projet avant sa mise en ligne.
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </div>
+                                    <div class="col-lg-12 cont-prez">
+                                        <li>
+                                            <div class="col-lg-3">
+                                                <img class="img-responsive css-projet center-block" src="img/projet/loutrotter.png" alt="">
+                                                <a href="https://github.com/mickaelpol/loutrotter" target="blank">
+                                                    <h3 class="text-center">
+                                                        Loutrotter
+                                                    </h3>
+                                                </a>
+                                                <p class="text-center">
+                                                    <strong>(Projet pédagogique 1re vague)</strong>
+                                                    <strong><i>09/10/2017 - 25/10/2017</i></strong>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <h4 class="prez text-justify">
+                                                    Au cours de ma formation nous avons eu des projets pédagogique en relation avec de réelles entreprises, Loutrotter en fait partie.
+                                                </h4>
+                                                <p class="fz18 prez text-justify">
+                                                    Le projet repose sur un globetrotter voulant mettre en avant ses voyages, faire voyager les personnes au travers de ses expèriences personnelles et faire participer sa communauté.
+                                                </p>
+                                                <p class="fz18 prez text-justify">
+                                                    Il à été créer et réalisé en PHP 7 natif sans POO, en groupe de 3 personnes à l'aide des outils trello pour l'organisation du travail en équipe et github pour le versionning.
+                                                </p>
+                                                <p class="fz18 prez text-justify">
+                                                    Il à été mis en ligne mais n'es plus visible actuellement étant donné que le propriétaire à changer de nom de domaine et n'à pas remis en ligne ce projet pour l'instant.
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </li>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!--///////////////////////// FIN PAGE PROJET ///////////////////////// -->
+        
+        
+        <!--///////////////////////// DEBUT PAGE CONTACT ///////////////////////// -->
+        
+        <div id="contact" class="container margeTop cont">
+            <div class="row">
+                <div class="col-lg-12 col-xs-12">
+                    <h2 class="text-uppercase text-center">
+                        Formulaire de contact
+                    </h2>
+                    <br>
+                    <div class="form-area">
+
+                        <?php if (array_key_exists('errors', $_SESSION)) : ?>
+                                <div class="col-lg-12">
+                                    <div class="alert alert-danger">
+                                        <strong><?= implode('<br>', $_SESSION['errors']); ?></strong>
+                                    </div>
+                                </div>
+                        <?php endif; ?>
+
+                        <form method="POST" action="?p=contact">
+                            <?php $form = new Form(isset($_SESSION['inputs']) ? $_SESSION['inputs'] : ""); ?>
+                            <br style="clear:both">
+
+                            <div class="col-lg-6 col-xs-12">
+                                <?= $form->text("nom", "nom") ?>
+                                <?= $form->email("email", "email") ?>
+                                <?= $form->mobile("mobile", "Téléphone (optionnel)") ?>
+                                <?= $form->text("sujet", "Sujet") ?>
+                            </div>
+
+                            <div class="col-lg-6 col-xs-12">
+                                <?= $form->textarea("message", "Message") ?>
+                                <span class="help-block">
+                                    <p id="characterLeft" class="text-contact help-block ">Vous avez atteint la limite</p>
+                                </span>
+                            </div>
+                            
+                            <div class="col-lg-offset-6 col-lg-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-lg-6 col-sm-6 col-xs-6">
+                                        <?= $form->captcha() ?>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 visible-md visible-sm">
+                                        <?= $form->submit("envoyer") ?>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 hidden-sm hidden-md col-xs-12">
+                                        <?= $form->submit("envoyer") ?>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--///////////////////////// FIN PAGE CONTACT ///////////////////////// -->
+        
+        <!--///////////////////////// DEBUT PAGE CV A4 ///////////////////////// -->
+        
+        <div class="container">
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog modal-lg">
+        
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">X</button>
+                            <h4 class="modal-title text-center">Téléchargement du cv</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <a download="pdffile/CV2018black.pdf" href="pdffile/CV2018black.pdf">
+                                        <img class="center-block img-responsive css-modal" src="./img/imgpdfile/imgcvblack.png" alt="image du cv version couleur">
+                                    </a>
+                                    <br>
+                                    <p class="text-center">
+                                        Version couleur
+                                    </p>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <a download="pdffile/CV2018white.pdf" href="pdffile/CV2018white.pdf">
+                                        <img class="center-block img-responsive css-modal" src="./img/imgpdfile/imgcvwhite.png" alt="image du cv version couleur">
+                                    </a>
+                                    <br>
+                                    <p class="text-center">
+                                        Version noir et blanc
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div style="margin-top:60px;" class="row">
+                                <div class="col-lg-12">
+                                    <p class="fz20 text-center text-success"><strong>Merci d'avoir télécharger mon CV</strong></p>
+                                    <p class="fz18 text-center">J'espère entrer en contact avec vous prochainement.
+                                        <br>Mickael POL
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!--///////////////////////// FIN PAGE CV A4 ///////////////////////// -->
+
+        <!-- body -->
+
+        <!-- footer -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        
+        <footer>
+            <div class="container">
+                <div class="row">
+        
+                    <div class="col-md-3 col-md-offset-1 col-sm-4 col-xs-6">
+                        <ul class="footer-list">
+                            <span>Adresse</span>
+                            <li>
+                                <p>18 Rue de cugnaux</p>
+                                <p>Appartement B 324</p>
+                                <p>31300 Toulouse</p>
+                            </li>
+        
+                            <li>
+                                <p>07 81 94 81 13</p>
+                            </li>
+        
+                        </ul>
+                    </div>
+        
+        
+        
+                    <div class="col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-1 col-xs-6">
+                        <ul class="footer-list">
+                            <span>Menu</span>
+
+                            <a href="#" class="homeClick">
+                                <li>Accueil</li>
+                            </a>
+        
+                            <a href="#" class="compClick">
+                                <li>Compétences</li>
+                            </a>
+        
+                            <a href="#" class="xpClick">
+                                <li>Expériences</li>
+                            </a>
+        
+                            <a href="#" class="dipClick">
+                                <li>Diplomes</li>
+                            </a>
+        
+                            <a href="#" class="proClick">
+                                <li>Projet</li>
+                            </a>
+                            
+                            <a href="#" class="contactClick">
+                                <li>Contact</li>
+                            </a>
+                        </ul>
+                    </div>
+        
+                    <div class="col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-1 col-xs-12">
+                        <ul class="social">
+                            <span>Social</span>
+        
+                            <li>
+                                <a target="blank" href="https://github.com/mickaelpol?tab=repositories">
+                                    <i class="fa fa-github fa-2x"></i>
+                                </a>
+                            </li>
+        
+                            <li>
+                                <a target="blank" href="https://www.linkedin.com/in/mickael-pol-02785a7a/">
+                                    <i class="fa fa-linkedin fa-2x"></i>
+                                </a>
+                            </li>
+        
+                            <li>
+                                <a href="mailto:mickael.devweb@gmail.com?subject=Contact via CV en ligne&body=Entrez votre message ici">
+                                    <i class="fa fa-google-plus fa-2x"></i>
+                                </a>
+                            </li>
+        
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- footer -->
+        
+
+        <!-- jQuery -->
+        <!--<script src="node_modules/jquery/dist/jquery.min.js"></script>-->
+        <script src="assets/js/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <!--<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>-->
+        <script src="assets/js/bootstrap.min.js"></script>
+
+        <!-- script de gestion de la navigation -->
+        <script src="assets/js/section.js"></script>
+
+
+        <?php if (array_key_exists('errors', $_SESSION)) : ?>
+            <?= $_SESSION['script'] ? $_SESSION['script'] : '' ?>
+        <?php
+            unset($_SESSION['errors']);
+            unset($_SESSION['script']);
+            unset($_SESSION['inputs']);
+        endif;
+        ?>
+        
+        <!-- my Script -->
+        <script src="assets/js/app.js"></script>
+    </body>
+</html>
+
